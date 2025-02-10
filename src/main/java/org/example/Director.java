@@ -51,4 +51,37 @@ public class Director {
             throw new RuntimeException("Something went wrong while reading directors csv");
         }
     }
+
+    public static void getTop5DirectorsWithMostMovies() {
+        try {
+            if (Movie.movieDataset.isEmpty()) {
+                System.out.println("No movies available to find top directors.");
+                return;
+            }
+
+            Map<Integer, Integer> directorMovieCount = new HashMap<>();
+
+            for (Movie movie : Movie.movieDataset) {
+                directorMovieCount.put(movie.DirectorId, directorMovieCount.getOrDefault(movie.DirectorId, 0) + 1);
+            }
+
+            List<Map.Entry<Integer, Integer>> sortedDirectors = new ArrayList<>(directorMovieCount.entrySet());
+            sortedDirectors.sort((d1, d2) -> d2.getValue().compareTo(d1.getValue()));
+
+            System.out.println("\n==== Top 5 Directors with Most Movies ====");
+            int count = 0;
+
+            for (Map.Entry<Integer, Integer> entry : sortedDirectors) {
+                for (Director director : directorDataset) {
+                    if (director.DirectorId == entry.getKey()) {
+                        System.out.println((count + 1) + ". " + director.name + " - " + entry.getValue() + " movies");
+                        count++;
+                        if (count == 5) return;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred while finding top directors: " + e.getMessage());
+        }
+    }
 }
