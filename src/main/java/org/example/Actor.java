@@ -34,4 +34,20 @@ public class Actor {
                 ", nationality='" + nationality + '\'' +
                 '}';
     }
+
+    static List<Actor> actorDataset = new ArrayList<>();
+    public void loadActorCSV(){
+        String line ="", splitby=",";
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(Main.class.getClassLoader().getResource("actors.csv").getFile()));
+            br.readLine();
+            while((line = br.readLine())!=null){
+                String[] data = line.split(splitby);
+                actorDataset.add(new Actor(Integer.parseInt(data[0]), data[1], data[2], data[3]));
+            }
+        }
+        catch(IOException | NumberFormatException e){
+            throw new RuntimeException("Something went wrong while reading actors csv");
+        }
+    }
 }
