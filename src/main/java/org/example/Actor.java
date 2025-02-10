@@ -67,7 +67,6 @@ public class Actor {
                 }
             }
 
-            // Find the actor with the most movies
             int maxMovies = 0;
             int bestActorId = -1;
             for (Map.Entry<Integer, Integer> entry : actorMovieCount.entrySet()) {
@@ -82,7 +81,6 @@ public class Actor {
                 return;
             }
 
-            // Get actor details
             for (Actor actor : actorDataset) {
                 if (actor.ActorId == bestActorId) {
                     System.out.println("\n==== Actor Who Has Worked in Most Movies ====");
@@ -106,7 +104,6 @@ public class Actor {
 
             Actor youngestActor = null;
 
-            // Find the youngest actor (compare DOB strings)
             for (Actor actor : actorDataset) {
                 if (youngestActor == null || actor.dob.compareTo(youngestActor.dob) > 0) {
                     youngestActor = actor;
@@ -121,7 +118,6 @@ public class Actor {
             System.out.println("\n==== Movies of the Youngest Actor ====");
             System.out.println("Actor: " + youngestActor.name + " | DOB: " + youngestActor.dob);
 
-            // Find and print movies of the youngest actor
             List<Movie> actorMovies = new ArrayList<>();
             for (Movie movie : Movie.movieDataset) {
                 if (movie.actors.contains(youngestActor.ActorId)) {

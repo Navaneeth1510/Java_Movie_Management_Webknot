@@ -245,7 +245,7 @@ public class Movie {
             }
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter valid years.");
-            sc.nextLine(); // Clear scanner buffer
+            sc.nextLine();
         } catch (Exception e) {
             System.out.println("An error occurred while fetching movies by year range: " + e.getMessage());
         }
@@ -257,7 +257,7 @@ public class Movie {
             int MovieId = sc.nextInt();
 
             System.out.print("Enter Title: ");
-            sc.nextLine(); // Clear the buffer
+            sc.nextLine();
             String title = sc.nextLine();
 
             System.out.print("Enter Release Year: ");
@@ -292,7 +292,7 @@ public class Movie {
             System.out.println(newMovie);
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter the correct data type.");
-            sc.nextLine(); // Clear scanner buffer to prevent infinite loops
+            sc.nextLine();
         } catch (Exception e) {
             System.out.println("An error occurred while adding the movie: " + e.getMessage());
         }
@@ -327,7 +327,7 @@ public class Movie {
             System.out.println("Movie updated successfully!");
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter the correct data type.");
-            sc.nextLine(); // Clear scanner buffer
+            sc.nextLine();
         } catch (Exception e) {
             System.out.println("An error occurred while updating the movie: " + e.getMessage());
         }
@@ -347,7 +347,7 @@ public class Movie {
             }
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter a valid Movie ID.");
-            sc.nextLine(); // Clear scanner buffer
+            sc.nextLine();
         } catch (Exception e) {
             System.out.println("An error occurred while deleting the movie: " + e.getMessage());
         }
