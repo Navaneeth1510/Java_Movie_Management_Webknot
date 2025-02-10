@@ -15,7 +15,6 @@ public class Movie {
     int DirectorId;
     ArrayList<Integer> actors;
 
-    static List<Movie> movieDataset = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
 
     public Movie(int movieId, String title, int releaseYear, String genre, Double rating, Double duration, int directorId, ArrayList<Integer> actors) {
@@ -45,5 +44,27 @@ public class Movie {
                 ", DirectorId=" + DirectorId +
                 ", actors=" + actors +
                 "";
+    }
+
+    static List<Movie> movieDataset = new ArrayList<>();
+    public void loadMovieCSV(){
+        String line ="", splitby=",";
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(Main.class.getClassLoader().getResource("movies.csv").getFile()));
+            br.readLine();
+            while((line = br.readLine())!=null){
+                String[] data = line.split(splitby);
+                ArrayList<Integer> listOfActors = new ArrayList<>();
+
+                String actors = (line.split("\""))[1];
+                String[] actorarray = actors.split(",");
+                for(String s: actorarray)
+                    listOfActors.add(Integer.parseInt(s));
+                movieDataset.add(new Movie(Integer.parseInt(data[0]), data[1], Integer.parseInt(data[2]), data[3], Double.parseDouble(data[4]), Double.parseDouble(data[5]), Integer.parseInt(data[6]), new ArrayList<>(listOfActors)));
+            }
+        }
+        catch(IOException | NumberFormatException e){
+            throw new RuntimeException("Something went wrong while reading movies csv");
+        }
     }
 }

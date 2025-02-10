@@ -35,4 +35,20 @@ public class Director {
                 ", nationality='" + nationality + '\'' +
                 '}';
     }
+
+    static List<Director> directorDataset = new ArrayList<>();
+    public void loadDirectorCSV(){
+        String line ="", splitby=",";
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(Main.class.getClassLoader().getResource("directors.csv").getFile()));
+            br.readLine();
+            while((line = br.readLine())!=null){
+                String[] data = line.split(splitby);
+                directorDataset.add(new Director(Integer.parseInt(data[0]), data[1], data[2], data[3]));
+            }
+        }
+        catch(IOException | NumberFormatException e){
+            throw new RuntimeException("Something went wrong while reading directors csv");
+        }
+    }
 }
